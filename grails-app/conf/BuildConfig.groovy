@@ -38,6 +38,12 @@ grails.project.dependency.resolution = {
             export = false
         }
 
+        runtime ":resources:latest.integration"
+        compile ":angularjs-resources:latest.integration"
+        compile ":coffeescript-resources:latest.integration"
+        runtime ":jquery:latest.integration"
+        runtime ":jquery-ui:latest.integration"
+
         test ':spock:latest.integration'
     }
 }
