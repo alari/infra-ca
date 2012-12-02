@@ -17,11 +17,13 @@ grails.project.dependency.resolution = {
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
-        mavenCentral()
+
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://artifactory.dev/repo"
+        mavenCentral()
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -37,12 +39,6 @@ grails.project.dependency.resolution = {
               ":release:2.0.3") {
             export = false
         }
-
-        runtime ":resources:latest.integration"
-        compile ":angularjs-resources:latest.integration"
-        compile ":coffeescript-resources:latest.integration"
-        runtime ":jquery:latest.integration"
-        runtime ":jquery-ui:latest.integration"
 
         test ':spock:latest.integration'
     }
