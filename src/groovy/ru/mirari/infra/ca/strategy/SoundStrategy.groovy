@@ -1,13 +1,12 @@
 package ru.mirari.infra.ca.strategy
 
-import ru.mirari.infra.FileStorageService
-import ru.mirari.infra.ca.Atom
-
-import ru.mirari.infra.file.BasicFileHolder
-import ru.mirari.infra.file.FileHolder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import ru.mirari.infra.FileStorageService
+import ru.mirari.infra.ca.Atom
 import ru.mirari.infra.ca.AtomStrategy
+import ru.mirari.infra.file.BasicFileHolder
+import ru.mirari.infra.file.FileHolder
 
 /**
  * @author alari
@@ -25,8 +24,8 @@ class SoundStrategy extends AtomStrategy {
     FileStorageService fileStorageService
     String filesBucket = "mirarisounds"
 
-    private FileHolder getFileHolder(Atom atom) {
-        FileHolder holder = new BasicFileHolder(atom.id, filesBucket)
+    private FileStorageService.BasicFilesHolder getFileHolder(Atom atom) {
+        def holder = fileStorageService.getHolder(atom.id, filesBucket)
         if (atom.sounds) holder.fileNames = atom.sounds.values()
         holder
     }
@@ -45,12 +44,12 @@ class SoundStrategy extends AtomStrategy {
     @Override
     void setContent(Atom atom, Atom.Push data) {
         if (data.file) {
-            FileHolder holder = getFileHolder(atom)
+            FileStorageService.BasicFilesHolder holder = getFileHolder(atom)
             String type = data.fileType.substring(data.fileType.indexOf("/") + 1)
             String fileName = TYPES.get(type)
             if (!fileName) throw new IllegalArgumentException("Wrong data object given")
 
-            fileStorageService.store(data.file, holder, fileName)
+            getFileHolder(atom)?.store(data.file, fileName)
 
             if (!atom.sounds) atom.sounds = [:]
             atom.sounds.put(type, fileName)
@@ -61,8 +60,7 @@ class SoundStrategy extends AtomStrategy {
     @Override
     void delete(Atom atom) {
         if (atom.sounds && atom.sounds.size()) {
-            FileHolder holder = getFileHolder(atom)
-            fileStorageService.delete(holder)
+            getFileHolder(atom)?.delete()
             atom.sounds = null
         }
     }
