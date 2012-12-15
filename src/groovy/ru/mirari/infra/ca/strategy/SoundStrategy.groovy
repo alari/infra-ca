@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component
 import ru.mirari.infra.FileStorageService
 import ru.mirari.infra.ca.Atom
 import ru.mirari.infra.ca.AtomStrategy
-import ru.mirari.infra.file.BasicFileHolder
-import ru.mirari.infra.file.FileHolder
 
 /**
  * @author alari
