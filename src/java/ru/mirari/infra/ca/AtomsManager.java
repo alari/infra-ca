@@ -40,8 +40,6 @@ public class AtomsManager implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         for (Map.Entry<String, AtomStrategy> e : applicationContext.getBeansOfType(AtomStrategy.class).entrySet()) {
             AtomStrategy strategy = e.getValue();
-            System.out.println(e.getKey());
-            System.out.println(strategy.getName());
             strategies.put(strategy.getName(), strategy);
 
             if (strategy.checkLast()) strategyDiscoverySequence.addLast(strategy);
