@@ -4,7 +4,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-import ru.mirari.infra.ca.AtomStrategy;
 import ru.mirari.infra.ca.ex.CreativeAtomException;
 import ru.mirari.infra.ca.ex.NoTypeStrategyFound;
 import ru.mirari.infra.ca.impl.AtomPOJO;
@@ -35,11 +34,14 @@ public class AtomsManager implements ApplicationContextAware {
      *
      * @param applicationContext app main context
      * @throws org.springframework.beans.BeansException
+     *
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         for (Map.Entry<String, AtomStrategy> e : applicationContext.getBeansOfType(AtomStrategy.class).entrySet()) {
             AtomStrategy strategy = e.getValue();
+            System.out.println(e.getKey());
+            System.out.println(strategy.getName());
             strategies.put(strategy.getName(), strategy);
 
             if (strategy.checkLast()) strategyDiscoverySequence.addLast(strategy);

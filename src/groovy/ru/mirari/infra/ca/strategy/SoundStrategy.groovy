@@ -42,7 +42,6 @@ class SoundStrategy extends AtomStrategy {
     @Override
     void setContent(Atom atom, Atom.Push data) {
         if (data.file) {
-            FileStorageService.BasicFilesHolder holder = getFileHolder(atom)
             String type = data.fileType.substring(data.fileType.indexOf("/") + 1)
             String fileName = TYPES.get(type)
             if (!fileName) throw new IllegalArgumentException("Wrong data object given")
