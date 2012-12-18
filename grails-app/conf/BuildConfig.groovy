@@ -28,18 +28,19 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        compile 'org.pegdown:pegdown:1.2.1'
+        runtime 'org.pegdown:pegdown:latest.release'
         runtime "org.jsoup:jsoup:latest.release"
+        runtime "org.parboiled:parboiled-java:latest.release"
 
         // runtime 'mysql:mysql-connector-java:5.1.18'
     }
 
     plugins {
         build(":tomcat:$grailsVersion",
-                ":release:2.0.3") {
+                ":release:latest.release") {
             export = false
         }
 
-        test ':spock:latest.integration'
+        test ':spock:latest.release'
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component
 import ru.mirari.infra.FileStorageService
 import ru.mirari.infra.ca.Atom
 import ru.mirari.infra.ca.AtomStrategy
+import ru.mirari.infra.file.BasicFilesHolder
 
 /**
  * @author alari
@@ -22,7 +23,7 @@ class SoundStrategy extends AtomStrategy {
     FileStorageService fileStorageService
     String filesBucket = "mirarisounds"
 
-    private FileStorageService.BasicFilesHolder getFileHolder(Atom atom) {
+    private BasicFilesHolder getFileHolder(Atom atom) {
         def holder = fileStorageService.getHolder(atom.id, filesBucket)
         if (atom.sounds) holder.fileNames = atom.sounds.values()
         holder
