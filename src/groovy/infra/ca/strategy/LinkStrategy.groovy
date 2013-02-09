@@ -1,7 +1,7 @@
 package infra.ca.strategy
 
 import infra.ca.Atom
-
+import infra.ca.AtomPush
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -23,7 +23,7 @@ class LinkStrategy extends AtomStrategy {
     }
 
     @Override
-    boolean isContentSupported(Atom.Push data) {
+    boolean isContentSupported(AtomPush data) {
         if (data.url && data.url.protocol in ["http", "https"]) {
             HttpURLConnection connection = (HttpURLConnection) data.url.openConnection();
             connection.setRequestMethod("HEAD");
@@ -33,7 +33,7 @@ class LinkStrategy extends AtomStrategy {
     }
 
     @Override
-    void setContent(Atom atom, Atom.Push data) {
+    void setContent(Atom atom, AtomPush data) {
         if (data.url) {
             try {
                 final Document document = Jsoup.connect(data.url.toString()).get();

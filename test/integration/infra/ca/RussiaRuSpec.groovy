@@ -2,6 +2,7 @@ package infra.ca
 
 import grails.plugin.spock.IntegrationSpec
 import infra.ca.impl.AtomPOJO
+import infra.ca.impl.AtomPOJOPush
 import spock.lang.Stepwise
 
 @Stepwise
@@ -17,7 +18,7 @@ class RussiaRuSpec extends IntegrationSpec {
 
     void "test something"() {
         given:
-        Atom.Push data = new AtomPOJO.Push(
+        AtomPush data = new AtomPOJOPush(
                 externalUrl: "http://russia.ru/video/diskurs_12854/"
         )
         when:

@@ -4,6 +4,7 @@ import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
 import infra.ca.ex.NoTypeStrategyFound
 import infra.ca.impl.AtomPOJO
+import infra.ca.impl.AtomPOJOPush
 import spock.lang.Specification
 import spock.lang.Stepwise
 
@@ -29,11 +30,11 @@ class AtomsManagerSpec extends Specification {
 
     void "fictive push type fails"() {
         when:
-        atomsManager.build(new AtomPOJO.Push(type: "fictive"))
+        atomsManager.build(new AtomPOJOPush(type: "fictive"))
         then:
         thrown(NoTypeStrategyFound)
         when:
-        atomsManager.build(new AtomPOJO.Push())
+        atomsManager.build(new AtomPOJOPush())
         then:
         thrown(NoTypeStrategyFound)
         when:

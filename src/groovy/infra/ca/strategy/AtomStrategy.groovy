@@ -1,13 +1,14 @@
 package infra.ca.strategy
 
 import infra.ca.Atom
+import infra.ca.AtomPush
 
 /**
  * @author alari
  * @since 11/13/12 11:42 PM
  */
 abstract class AtomStrategy {
-    abstract boolean isContentSupported(final Atom.Push data);
+    abstract boolean isContentSupported(final AtomPush data);
 
     private volatile String name;
 
@@ -27,7 +28,7 @@ abstract class AtomStrategy {
         false
     }
 
-    final void update(Atom atom, final Atom.Push data) {
+    final void update(Atom atom, final AtomPush data) {
         if (atom.id && data.id && data.id != atom.id) {
             throw new IllegalAccessException("Trying to set data to an atom with different id")
         }
@@ -37,7 +38,7 @@ abstract class AtomStrategy {
         setContent(atom, data)
     }
 
-    abstract void setContent(Atom atom, final Atom.Push data);
+    abstract void setContent(Atom atom, final AtomPush data);
 
     void forUpdate(Atom atom) {}
 

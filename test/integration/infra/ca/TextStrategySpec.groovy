@@ -2,6 +2,7 @@ package infra.ca
 
 import grails.plugin.spock.IntegrationSpec
 import infra.ca.impl.AtomPOJO
+import infra.ca.impl.AtomPOJOPush
 import spock.lang.Stepwise
 
 @Stepwise
@@ -22,7 +23,7 @@ class TextStrategySpec extends IntegrationSpec {
 
     void "text type is ok"() {
         given:
-        Atom.Push data = new AtomPOJO.Push(
+        AtomPush data = new AtomPOJOPush(
                 title: "test text",
                 text: "a"
         )

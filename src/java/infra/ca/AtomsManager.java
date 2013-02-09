@@ -1,5 +1,6 @@
 package infra.ca;
 
+import infra.ca.impl.AtomPOJOPush;
 import infra.ca.strategy.AtomStrategy;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -25,7 +26,7 @@ import java.util.TreeMap;
 @Service
 public class AtomsManager implements ApplicationContextAware {
     private Class<? extends Atom> atomClass = AtomPOJO.class;
-    private Class<? extends Atom.Push> atomPushClass = AtomPOJO.Push.class;
+    private Class<? extends AtomPush> atomPushClass = AtomPOJOPush.class;
 
     private Map<String, AtomStrategy> strategies = new TreeMap<String, AtomStrategy>();
     private LinkedList<AtomStrategy> strategyDiscoverySequence = new LinkedList<AtomStrategy>();
@@ -60,7 +61,7 @@ public class AtomsManager implements ApplicationContextAware {
      * @throws InstantiationException
      * @throws CreativeAtomException
      */
-    public Atom build(Atom.Push data) throws IllegalAccessException, InstantiationException, CreativeAtomException {
+    public Atom build(AtomPush data) throws IllegalAccessException, InstantiationException, CreativeAtomException {
         if (data == null) {
             throw new NullPointerException();
         }
@@ -97,7 +98,7 @@ public class AtomsManager implements ApplicationContextAware {
      *
      * @param data user given data
      */
-    private void prepareExtendedInfo(Atom.Push data) {
+    private void prepareExtendedInfo(AtomPush data) {
         // Preparing external url info
         if (data.getExternalUrl() != null && !data.getExternalUrl().isEmpty()) {
             String externalUrl = data.getExternalUrl();
@@ -144,7 +145,7 @@ public class AtomsManager implements ApplicationContextAware {
      * @param data to update with
      * @throws CreativeAtomException
      */
-    public void update(Atom atom, Atom.Push data) throws CreativeAtomException {
+    public void update(Atom atom, AtomPush data) throws CreativeAtomException {
         prepareExtendedInfo(data);
         getStrategy(atom).update(atom, data);
     }

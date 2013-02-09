@@ -3,6 +3,7 @@ package infra.ca
 import grails.plugin.spock.IntegrationSpec
 import infra.ca.ex.NoTypeStrategyFound
 import infra.ca.impl.AtomPOJO
+import infra.ca.impl.AtomPOJOPush
 import spock.lang.Stepwise
 
 @Stepwise
@@ -18,7 +19,7 @@ class LinkStrategySpec extends IntegrationSpec {
 
     void "ya.ru works ok"() {
         given:
-        infra.ca.Atom.Push data = new infra.ca.impl.AtomPOJO.Push(
+        AtomPush data = new AtomPOJOPush(
                 externalUrl: "ya.ru"
         )
         when:
@@ -31,7 +32,7 @@ class LinkStrategySpec extends IntegrationSpec {
 
     void "wrong url doesnt match anything"() {
         given:
-        Atom.Push data = new AtomPOJO.Push(
+        AtomPush data = new AtomPOJOPush(
                 externalUrl: "fuck cfk"
         )
         when:

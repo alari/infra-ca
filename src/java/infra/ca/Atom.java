@@ -1,7 +1,5 @@
 package infra.ca;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Date;
 import java.util.Map;
 
@@ -52,23 +50,4 @@ public interface Atom extends StringIdContainer {
     public String getExternalUrl();
 
     public void setExternalUrl(String externalUrl);
-
-    public static interface Push extends Atom {
-        public File getFile();
-
-        public void setFile(File file);
-
-        public String getOriginalFilename();
-
-        public void setOriginalFilename(String originalFilename);
-
-
-        public URL getUrl();
-
-        public void setUrl(URL url);
-
-        public String getFileType();
-
-        public void setFileType(String fileType);
-    }
 }

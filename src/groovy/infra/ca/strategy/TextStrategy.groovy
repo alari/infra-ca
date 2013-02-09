@@ -1,7 +1,7 @@
 package infra.ca.strategy
 
 import infra.ca.Atom
-
+import infra.ca.AtomPush
 import infra.text.TextProcessService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -15,7 +15,7 @@ class TextStrategy extends AtomStrategy {
     @Autowired private TextProcessService textProcessService
 
     @Override
-    boolean isContentSupported(Atom.Push data) {
+    boolean isContentSupported(AtomPush data) {
         if (data.file) {
             return (data.originalFilename.substring(data.originalFilename.lastIndexOf('.') + 1)) in ["txt", "htm", "html", "md", "markdown"]
         }
@@ -23,7 +23,7 @@ class TextStrategy extends AtomStrategy {
     }
 
     @Override
-    void setContent(Atom atom, Atom.Push data) {
+    void setContent(Atom atom, AtomPush data) {
         if (data.file) {
             if (data.originalFilename.endsWith("html") || data.originalFilename.endsWith("htm")) {
                 data.text = textProcessService.htmlToMarkdown(data.file.text)

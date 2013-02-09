@@ -1,5 +1,6 @@
 package infra.ca.strategy
 
+import infra.ca.AtomPush
 import infra.file.storage.FileStorageService
 import infra.file.storage.FilesManager
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,7 +30,7 @@ class SoundStrategy extends AtomStrategy {
     }
 
     @Override
-    boolean isContentSupported(Atom.Push data) {
+    boolean isContentSupported(AtomPush data) {
         if (!data.file) return false
         assert data.fileType != null
         if (!data.fileType.startsWith("audio/")) return false
@@ -40,7 +41,7 @@ class SoundStrategy extends AtomStrategy {
     }
 
     @Override
-    void setContent(Atom atom, Atom.Push data) {
+    void setContent(Atom atom, AtomPush data) {
         if (data.file) {
             String type = data.fileType.substring(data.fileType.indexOf("/") + 1)
             String fileName = TYPES.get(type)

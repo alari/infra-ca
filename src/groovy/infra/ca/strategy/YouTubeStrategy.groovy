@@ -1,7 +1,7 @@
 package infra.ca.strategy
 
 import infra.ca.Atom
-
+import infra.ca.AtomPush
 import infra.text.TextProcessService
 @Grab("org.apache.httpcomponents:httpclient:4.2.1") import org.apache.http.client.utils.URLEncodedUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,12 +17,12 @@ class YouTubeStrategy extends AtomStrategy {
     TextProcessService textProcessService
 
     @Override
-    boolean isContentSupported(Atom.Push data) {
+    boolean isContentSupported(AtomPush data) {
         (data.url && (data.url.host == "youtu.be" || (data.url.host == "www.youtube.com" && data.url.path == "/watch")))
     }
 
     @Override
-    void setContent(Atom atom, Atom.Push data) {
+    void setContent(Atom atom, AtomPush data) {
         if (data.url.host == "youtu.be") {
             // http://youtu.be/zi3AqicZgEk
             atom.externalId = data.url.path.substring(1)

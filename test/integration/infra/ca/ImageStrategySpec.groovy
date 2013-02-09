@@ -1,6 +1,7 @@
 package infra.ca
 
 import grails.plugin.spock.IntegrationSpec
+import infra.ca.impl.AtomPOJOPush
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.core.io.ClassPathResource
 import infra.ca.impl.AtomPOJO
@@ -24,7 +25,7 @@ class ImageStrategySpec extends IntegrationSpec {
 
     void "can upload an image"() {
         given:
-        Atom.Push data = new AtomPOJO.Push(
+        AtomPush data = new AtomPOJOPush(
                 file: imageFile,
                 id: id,
                 originalFilename: "test.jpg"

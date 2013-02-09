@@ -1,5 +1,6 @@
 package infra.ca.strategy
 
+import infra.ca.AtomPush
 import infra.file.storage.FilesHolder
 import infra.images.ImageManager
 import infra.images.ImagesService
@@ -56,12 +57,12 @@ class ImageStrategy extends AtomStrategy {
     }
 
     @Override
-    boolean isContentSupported(Atom.Push data) {
+    boolean isContentSupported(AtomPush data) {
         (data.file && data.fileType.startsWith("image/"))
     }
 
     @Override
-    void setContent(Atom atom, Atom.Push data) {
+    void setContent(Atom atom, AtomPush data) {
         if (data.file) {
             atom.title = data.originalFilename.substring(0, data.originalFilename.lastIndexOf("."))
             atom.images = [:]
