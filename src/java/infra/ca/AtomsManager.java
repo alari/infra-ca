@@ -114,7 +114,7 @@ public class AtomsManager implements ApplicationContextAware {
             }
         }
         // Preparing uploaded file info
-        if (data.getFile() != null) {
+        if (data.getFile() != null && data.getFileType() == null) {
             try {
                 data.setFileType(Files.probeContentType(data.getFile().toPath()));
             } catch (IOException e) {
