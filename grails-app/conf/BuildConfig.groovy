@@ -15,6 +15,7 @@ grails.project.dependency.resolution = {
     inherits("global") {
         // uncomment to disable ehcache
         // excludes 'ehcache'
+        excludes 'asm'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
@@ -37,9 +38,9 @@ grails.project.dependency.resolution = {
 
         compile 'org.pegdown:pegdown:1.2.1'
         compile "org.jsoup:jsoup:1.7.2"
-        compile "org.parboiled:parboiled-java:1.1.3"
-        compile "org.parboiled:parboiled-core:1.1.3"
-        compile "asm:asm-all:3.3.1"
+        compile "org.parboiled:parboiled-java:1.1.4"
+        compile "org.parboiled:parboiled-core:1.1.4"
+        compile "org.ow2.asm:asm-all:4.1"
 
         test("org.spockframework:spock-grails-support:0.7-groovy-2.0") {
             export = false

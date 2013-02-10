@@ -8,7 +8,7 @@ import spock.lang.Stepwise
 class LinkStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
-    def atomRepoService
+    def atomFactory
 
     def setup() {
     }
@@ -18,7 +18,7 @@ class LinkStrategySpec extends IntegrationSpec {
 
     void "ya.ru works ok"() {
         given:
-        AtomPush data = atomRepoService.buildPushAtom(
+        AtomPush data = atomFactory.buildPushAtom(
                 externalUrl: "ya.ru"
         )
         when:
@@ -31,7 +31,7 @@ class LinkStrategySpec extends IntegrationSpec {
 
     void "wrong url doesnt match anything"() {
         given:
-        AtomPush data = atomRepoService.buildPushAtom(
+        AtomPush data = atomFactory.buildPushAtom(
                 externalUrl: "fuck cfk"
         )
         when:

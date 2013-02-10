@@ -7,7 +7,7 @@ import spock.lang.Stepwise
 class TextStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
-    def atomRepoService
+    def atomFactory
 
     def setup() {
     }
@@ -22,7 +22,7 @@ class TextStrategySpec extends IntegrationSpec {
 
     void "text type is ok"() {
         given:
-        AtomPush data = atomRepoService.buildPushAtom(
+        AtomPush data = atomFactory.buildPushAtom(
                 title: "test text",
                 text: "a"
         )

@@ -7,7 +7,7 @@ import spock.lang.Stepwise
 class RussiaRuSpec extends IntegrationSpec {
 
     AtomsManager atomsManager
-    def atomRepoService
+    def atomFactory
 
     def setup() {
     }
@@ -17,7 +17,7 @@ class RussiaRuSpec extends IntegrationSpec {
 
     void "test something"() {
         given:
-        AtomPush data = atomRepoService.buildPushAtom(
+        AtomPush data = atomFactory.buildPushAtom(
                 externalUrl: "http://russia.ru/video/diskurs_12854/"
         )
         when:

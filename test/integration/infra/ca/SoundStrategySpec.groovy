@@ -10,7 +10,7 @@ import spock.lang.Stepwise
 class SoundStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
-    def atomRepoService
+    def atomFactory
 
     @Shared File soundFile
     @Shared String id = RandomStringUtils.randomAlphanumeric(5)
@@ -21,7 +21,7 @@ class SoundStrategySpec extends IntegrationSpec {
 
     void "can upload a sound"() {
         given:
-        AtomPush data = atomRepoService.buildPushAtom(
+        AtomPush data = atomFactory.buildPushAtom(
                 file: soundFile,
                 id: id,
                 originalFilename: "test.mp3"
@@ -43,7 +43,7 @@ class SoundStrategySpec extends IntegrationSpec {
 
     void "can delete a sound"() {
         given:
-        Atom atom = atomRepoService.buildAtom(id: id, sounds: [mpeg: "sound.mp3"], type: "sound")
+        Atom atom = atomFactory.buildAtom(id: id, sounds: [mpeg: "sound.mp3"], type: "sound")
         when:
         atomsManager.delete(atom)
         then:

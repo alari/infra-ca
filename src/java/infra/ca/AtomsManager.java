@@ -28,7 +28,7 @@ public class AtomsManager implements ApplicationContextAware {
     private Map<String, AtomStrategy> strategies = new TreeMap<String, AtomStrategy>();
     private LinkedList<AtomStrategy> strategyDiscoverySequence = new LinkedList<AtomStrategy>();
 
-    @Autowired private AtomRepo atomRepoService;
+    @Autowired private AtomFactory atomFactory;
 
     /**
      * Caches strategy beans for further use
@@ -66,7 +66,7 @@ public class AtomsManager implements ApplicationContextAware {
         }
         AtomStrategy strategy = null;
         if (data.getType() != null) strategy = strategies.get(data.getType());
-        Atom atom = atomRepoService.buildAtom();
+        Atom atom = atomFactory.buildAtom();
 
         prepareExtendedInfo(data);
 

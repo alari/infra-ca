@@ -1,4 +1,5 @@
 import infra.ca.AtomsManager
+import infra.ca.impl.AtomFactoryImpl
 import infra.text.TextProcessService
 
 class InfraCaGrailsPlugin {
@@ -50,6 +51,7 @@ Brief summary/description of the plugin.
         context.'component-scan'('base-package': "infra.ca.strategy")
         textProcessService(TextProcessService)
         atomsManager(AtomsManager)
+        atomFactory(AtomFactoryImpl)
         // TODO Implement runtime spring config (optional)
     }
 

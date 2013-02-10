@@ -10,7 +10,7 @@ import spock.lang.Stepwise
 class ImageStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
-    def atomRepoService
+    def atomFactory
 
     @Shared File imageFile
     @Shared String id = RandomStringUtils.randomAlphanumeric(5)
@@ -22,7 +22,7 @@ class ImageStrategySpec extends IntegrationSpec {
 
     void "can upload an image"() {
         given:
-        AtomPush data = atomRepoService.buildPushAtom(
+        AtomPush data = atomFactory.buildPushAtom(
                 file: imageFile,
                 id: id,
                 originalFilename: "test.jpg"
@@ -44,7 +44,7 @@ class ImageStrategySpec extends IntegrationSpec {
 
     void "can delete an image"() {
         given:
-        Atom atom = atomRepoService.buildAtom(id: id, type: "image")
+        Atom atom = atomFactory.buildAtom(id: id, type: "image")
         when:
         atomsManager.delete(atom)
         then:

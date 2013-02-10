@@ -3,6 +3,7 @@ package infra.ca
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
 import infra.ca.ex.NoTypeStrategyFound
+import infra.ca.impl.AtomFactoryImpl
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Stepwise
@@ -14,12 +15,12 @@ import spock.lang.Stepwise
 @Stepwise
 class AtomsManagerSpec extends Specification {
     @Shared AtomsManager atomsManager
-    @Shared AtomRepo atomRepoService
+    @Shared AtomFactory atomFactory
 
     def setupSpec() {
         atomsManager = new AtomsManager()
-        atomRepoService = new AtomRepoService()
-        atomsManager.atomRepoService = atomRepoService
+        atomFactory = new AtomFactoryImpl()
+        atomsManager.atomFactory = atomFactory
     }
 
     void "atoms manager is wired"() {
@@ -29,11 +30,11 @@ class AtomsManagerSpec extends Specification {
 
     void "fictive push type fails"() {
         when:
-        atomsManager.build(atomRepoService.buildPushAtom(type: "fictive"))
+        atomsManager.build(atomFactory.buildPushAtom(type: "fictive"))
         then:
         thrown(NoTypeStrategyFound)
         when:
-        atomsManager.build(atomRepoService.buildPushAtom())
+        atomsManager.build(atomFactory.buildPushAtom())
         then:
         thrown(NoTypeStrategyFound)
         when:

@@ -1,9 +1,13 @@
-package infra.ca
+package infra.ca.impl
 
-import infra.ca.impl.AtomPOJO
-import infra.ca.impl.AtomPOJOPush
+import groovy.transform.TypeChecked
+import infra.ca.AtomFactory
 
-class AtomRepoService implements AtomRepo<AtomPOJO,AtomPOJOPush> {
+/**
+ * @author alari
+ * @since 2/10/13 10:26 PM
+ */
+class AtomFactoryImpl implements AtomFactory<AtomPOJO,AtomPOJOPush> {
     @Override
     AtomPOJOPush buildPushAtom() {
         new AtomPOJOPush()
