@@ -5,6 +5,7 @@ import infra.ca.impl.AtomPOJOPush
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.core.io.ClassPathResource
 import infra.ca.impl.AtomPOJO
+import spock.lang.Shared
 import spock.lang.Stepwise
 
 @Stepwise
@@ -12,16 +13,13 @@ class ImageStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
 
-    File imageFile
-    String id = RandomStringUtils.randomAlphanumeric(5)
+    @Shared File imageFile
+    @Shared String id = RandomStringUtils.randomAlphanumeric(5)
 
-    def setup() {
+    def setupSpec() {
         imageFile = new ClassPathResource("image.jpg", this.class).getFile();
     }
 
-
-    def cleanup() {
-    }
 
     void "can upload an image"() {
         given:
@@ -30,6 +28,12 @@ class ImageStrategySpec extends IntegrationSpec {
                 id: id,
                 originalFilename: "test.jpg"
         )
+        when: "preparing extended info"
+        atomsManager.prepareExtendedInfo(data)
+
+        then: "correct file mime type is found"
+        data.fileType == "image/jpeg"
+
         when:
         Atom atom = atomsManager.build(data)
         then:

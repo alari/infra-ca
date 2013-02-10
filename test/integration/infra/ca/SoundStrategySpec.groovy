@@ -5,6 +5,7 @@ import infra.ca.impl.AtomPOJOPush
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.core.io.ClassPathResource
 import infra.ca.impl.AtomPOJO
+import spock.lang.Shared
 import spock.lang.Stepwise
 
 @Stepwise
@@ -12,14 +13,11 @@ class SoundStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
 
-    File soundFile
-    String id = RandomStringUtils.randomAlphanumeric(5)
+    @Shared File soundFile
+    @Shared String id = RandomStringUtils.randomAlphanumeric(5)
 
-    def setup() {
+    def setupSpec() {
         soundFile = new ClassPathResource("sound.mp3", this.class).getFile();
-    }
-
-    def cleanup() {
     }
 
     void "can upload a sound"() {
@@ -29,6 +27,12 @@ class SoundStrategySpec extends IntegrationSpec {
                 id: id,
                 originalFilename: "test.mp3"
         )
+        when: "preparing extended info"
+        atomsManager.prepareExtendedInfo(data)
+
+        then: "correct file mime type is found"
+        data.fileType == "audio/mpeg"
+
         when:
         Atom atom = atomsManager.build(data)
         then:
