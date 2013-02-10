@@ -1,10 +1,8 @@
 package infra.ca
 
 import grails.plugin.spock.IntegrationSpec
-import infra.ca.impl.AtomPOJOPush
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.core.io.ClassPathResource
-import infra.ca.impl.AtomPOJO
 import spock.lang.Shared
 import spock.lang.Stepwise
 
@@ -12,6 +10,7 @@ import spock.lang.Stepwise
 class SoundStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
+    def atomRepoService
 
     @Shared File soundFile
     @Shared String id = RandomStringUtils.randomAlphanumeric(5)
@@ -22,7 +21,7 @@ class SoundStrategySpec extends IntegrationSpec {
 
     void "can upload a sound"() {
         given:
-        AtomPush data = new AtomPOJOPush(
+        AtomPush data = atomRepoService.buildPushAtom(
                 file: soundFile,
                 id: id,
                 originalFilename: "test.mp3"
@@ -44,7 +43,7 @@ class SoundStrategySpec extends IntegrationSpec {
 
     void "can delete a sound"() {
         given:
-        Atom atom = new AtomPOJO(id: id, sounds: [mpeg: "sound.mp3"], type: "sound")
+        Atom atom = atomRepoService.buildAtom(id: id, sounds: [mpeg: "sound.mp3"], type: "sound")
         when:
         atomsManager.delete(atom)
         then:

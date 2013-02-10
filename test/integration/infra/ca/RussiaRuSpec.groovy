@@ -1,14 +1,13 @@
 package infra.ca
 
 import grails.plugin.spock.IntegrationSpec
-import infra.ca.impl.AtomPOJO
-import infra.ca.impl.AtomPOJOPush
 import spock.lang.Stepwise
 
 @Stepwise
 class RussiaRuSpec extends IntegrationSpec {
 
     AtomsManager atomsManager
+    def atomRepoService
 
     def setup() {
     }
@@ -18,7 +17,7 @@ class RussiaRuSpec extends IntegrationSpec {
 
     void "test something"() {
         given:
-        AtomPush data = new AtomPOJOPush(
+        AtomPush data = atomRepoService.buildPushAtom(
                 externalUrl: "http://russia.ru/video/diskurs_12854/"
         )
         when:

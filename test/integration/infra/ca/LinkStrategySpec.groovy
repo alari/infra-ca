@@ -2,14 +2,13 @@ package infra.ca
 
 import grails.plugin.spock.IntegrationSpec
 import infra.ca.ex.NoTypeStrategyFound
-import infra.ca.impl.AtomPOJO
-import infra.ca.impl.AtomPOJOPush
 import spock.lang.Stepwise
 
 @Stepwise
 class LinkStrategySpec extends IntegrationSpec {
 
-    infra.ca.AtomsManager atomsManager
+    AtomsManager atomsManager
+    def atomRepoService
 
     def setup() {
     }
@@ -19,7 +18,7 @@ class LinkStrategySpec extends IntegrationSpec {
 
     void "ya.ru works ok"() {
         given:
-        AtomPush data = new AtomPOJOPush(
+        AtomPush data = atomRepoService.buildPushAtom(
                 externalUrl: "ya.ru"
         )
         when:
@@ -32,7 +31,7 @@ class LinkStrategySpec extends IntegrationSpec {
 
     void "wrong url doesnt match anything"() {
         given:
-        AtomPush data = new AtomPOJOPush(
+        AtomPush data = atomRepoService.buildPushAtom(
                 externalUrl: "fuck cfk"
         )
         when:

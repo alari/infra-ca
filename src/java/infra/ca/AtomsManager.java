@@ -1,14 +1,13 @@
 package infra.ca;
 
-import infra.ca.impl.AtomPOJOPush;
 import infra.ca.strategy.AtomStrategy;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import infra.ca.ex.CreativeAtomException;
 import infra.ca.ex.NoTypeStrategyFound;
-import infra.ca.impl.AtomPOJO;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,11 +24,11 @@ import java.util.TreeMap;
  */
 @Service
 public class AtomsManager implements ApplicationContextAware {
-    private Class<? extends Atom> atomClass = AtomPOJO.class;
-    private Class<? extends AtomPush> atomPushClass = AtomPOJOPush.class;
 
     private Map<String, AtomStrategy> strategies = new TreeMap<String, AtomStrategy>();
     private LinkedList<AtomStrategy> strategyDiscoverySequence = new LinkedList<AtomStrategy>();
+
+    @Autowired private AtomRepo atomRepoService;
 
     /**
      * Caches strategy beans for further use
@@ -67,7 +66,7 @@ public class AtomsManager implements ApplicationContextAware {
         }
         AtomStrategy strategy = null;
         if (data.getType() != null) strategy = strategies.get(data.getType());
-        Atom atom = atomClass.newInstance();
+        Atom atom = atomRepoService.buildAtom();
 
         prepareExtendedInfo(data);
 

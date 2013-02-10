@@ -1,10 +1,8 @@
 package infra.ca
 
 import grails.plugin.spock.IntegrationSpec
-import infra.ca.impl.AtomPOJOPush
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.core.io.ClassPathResource
-import infra.ca.impl.AtomPOJO
 import spock.lang.Shared
 import spock.lang.Stepwise
 
@@ -12,6 +10,7 @@ import spock.lang.Stepwise
 class ImageStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
+    def atomRepoService
 
     @Shared File imageFile
     @Shared String id = RandomStringUtils.randomAlphanumeric(5)
@@ -23,7 +22,7 @@ class ImageStrategySpec extends IntegrationSpec {
 
     void "can upload an image"() {
         given:
-        AtomPush data = new AtomPOJOPush(
+        AtomPush data = atomRepoService.buildPushAtom(
                 file: imageFile,
                 id: id,
                 originalFilename: "test.jpg"
@@ -45,7 +44,7 @@ class ImageStrategySpec extends IntegrationSpec {
 
     void "can delete an image"() {
         given:
-        Atom atom = new AtomPOJO(id: id, type: "image")
+        Atom atom = atomRepoService.buildAtom(id: id, type: "image")
         when:
         atomsManager.delete(atom)
         then:

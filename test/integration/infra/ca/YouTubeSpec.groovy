@@ -1,22 +1,15 @@
 package infra.ca
 
 import grails.plugin.spock.IntegrationSpec
-import infra.ca.impl.AtomPOJO
-import infra.ca.impl.AtomPOJOPush
 
 class YouTubeSpec extends IntegrationSpec {
 
     AtomsManager atomsManager
-
-    def setup() {
-    }
-
-    def cleanup() {
-    }
+    def atomRepoService
 
     void "short link works ok"() {
         given:
-        AtomPush data = new AtomPOJOPush(
+        AtomPush data = atomRepoService.buildPushAtom(
                 externalUrl: "http://youtu.be/zi3AqicZgEk"
         )
         when:
@@ -28,7 +21,7 @@ class YouTubeSpec extends IntegrationSpec {
 
     void "long link works ok"() {
         given:
-        AtomPush data = new AtomPOJOPush(
+        AtomPush data = atomRepoService.buildPushAtom(
                 externalUrl: "http://www.youtube.com/watch?v=zi3AqicZgEk&feature=g-logo&context=G2e33cabFOAAAAAAABAA"
         )
         when:
