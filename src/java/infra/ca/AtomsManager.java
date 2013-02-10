@@ -64,9 +64,13 @@ public class AtomsManager implements ApplicationContextAware {
         if (data == null) {
             throw new NullPointerException();
         }
+
         AtomStrategy strategy = null;
-        if (data.getType() != null) strategy = strategies.get(data.getType());
         Atom atom = atomFactory.buildAtom();
+
+        if (data.getType() != null) {
+            strategy = strategies.get(data.getType());
+        }
 
         prepareExtendedInfo(data);
 
@@ -85,6 +89,8 @@ public class AtomsManager implements ApplicationContextAware {
             if (strategy == null) {
                 throw new NoTypeStrategyFound();
             }
+        } else {
+            atom.setType(strategy.getName());
         }
         atom.setDateCreated(new Date());
 

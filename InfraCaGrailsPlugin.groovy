@@ -1,6 +1,7 @@
 import infra.ca.AtomsManager
 import infra.ca.impl.AtomFactoryImpl
-import infra.text.TextProcessService
+import infra.text.MarkdownService
+import infra.text.TextCleanService
 
 class InfraCaGrailsPlugin {
     // the plugin version
@@ -49,10 +50,10 @@ Brief summary/description of the plugin.
     def doWithSpring = {
         xmlns context:"http://www.springframework.org/schema/context"
         context.'component-scan'('base-package': "infra.ca.strategy")
-        textProcessService(TextProcessService)
+        markdownService(MarkdownService)
+        textCleanService(TextCleanService)
         atomsManager(AtomsManager)
         atomFactory(AtomFactoryImpl)
-        // TODO Implement runtime spring config (optional)
     }
 
     def doWithDynamicMethods = { ctx ->

@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import org.pegdown.Extensions;
 import org.pegdown.PegDownProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +23,12 @@ import java.io.StringWriter;
  * @since 2/2/12 5:33 PM
  */
 @Service
-public class TextProcessService {
+public class MarkdownService {
+    @Autowired TextCleanService textCleanService;
+
     private ThreadLocal<PegDownProcessor> processorThreadLocal = new ThreadLocal<PegDownProcessor>();
     private ThreadLocal<Transformer> transformerThreadLocal = new ThreadLocal<Transformer>();
-    private final Logger log = Logger.getLogger(TextProcessService.class);
+    private final Logger log = Logger.getLogger(MarkdownService.class);
 
     public PegDownProcessor getPegDownProcessor() {
         if (processorThreadLocal.get() == null) {
@@ -37,7 +40,7 @@ public class TextProcessService {
     public Transformer getTransformer() {
         if (transformerThreadLocal.get() == null) {
             try {
-                File xsltFile = new ClassPathResource("markdown.xsl", TextProcessService.class).getFile();
+                File xsltFile = new ClassPathResource("markdown.xsl", MarkdownService.class).getFile();
 
                 Source xsltSource = new StreamSource(xsltFile);
 
@@ -53,12 +56,8 @@ public class TextProcessService {
         return transformerThreadLocal.get();
     }
 
-    public String cleanHtml(String unsafe) {
-        return unsafe == null || unsafe.isEmpty() ? "" : Jsoup.clean(unsafe, Whitelist.basic());
-    }
-
     public String markdownToHtml(String text) {
-        return text != null ? cleanHtml(getPegDownProcessor().markdownToHtml(text)) : "";
+        return text != null ? textCleanService.cleanHtml(getPegDownProcessor().markdownToHtml(text)) : "";
     }
 
     public String htmlToMarkdown(String theHTML) {

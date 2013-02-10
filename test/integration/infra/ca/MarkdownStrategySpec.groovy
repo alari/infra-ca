@@ -4,23 +4,17 @@ import grails.plugin.spock.IntegrationSpec
 import spock.lang.Stepwise
 
 @Stepwise
-class TextStrategySpec extends IntegrationSpec {
+class MarkdownStrategySpec extends IntegrationSpec {
 
     AtomsManager atomsManager
     def atomFactory
-
-    def setup() {
-    }
-
-    def cleanup() {
-    }
 
     void "is autowired"() {
         expect:
         atomsManager != null
     }
 
-    void "text type is ok"() {
+    void "markdown type is ok"() {
         given:
         AtomPush data = atomFactory.buildPushAtom(
                 title: "test text",
@@ -29,7 +23,7 @@ class TextStrategySpec extends IntegrationSpec {
         when:
         Atom atom = atomsManager.build(data)
         then:
-        atom.type == "text"
+        atom.type == "markdown"
         atom.title == data.title
         atom.text == "a"
         when:

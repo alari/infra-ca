@@ -2,7 +2,7 @@ package infra.ca.strategy
 
 import infra.ca.Atom
 import infra.ca.AtomPush
-import infra.text.TextProcessService
+import infra.text.MarkdownService
 @Grab("org.apache.httpcomponents:httpclient:4.2.1") import org.apache.http.client.utils.URLEncodedUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 @Component
 class YouTubeStrategy extends AtomStrategy {
     @Autowired
-    TextProcessService textProcessService
+    MarkdownService textProcessService
 
     @Override
     boolean isContentSupported(AtomPush data) {
