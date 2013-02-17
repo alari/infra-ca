@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component
  */
 @Component
 class MarkdownStrategy extends AtomStrategy {
-    @Autowired private MarkdownService markdownService
+    @Autowired
+    private MarkdownService markdownService
 
     @Override
     boolean isContentSupported(AtomPush data) {

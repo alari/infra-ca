@@ -8,8 +8,8 @@ import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import org.springframework.stereotype.Component
 
-import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
 
 /**
  * @author alari

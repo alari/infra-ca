@@ -1,13 +1,13 @@
 package infra.ca;
 
+import infra.ca.ex.CreativeAtomException;
+import infra.ca.ex.NoTypeStrategyFound;
 import infra.ca.strategy.AtomStrategy;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
-import infra.ca.ex.CreativeAtomException;
-import infra.ca.ex.NoTypeStrategyFound;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,7 +28,8 @@ public class AtomsManager implements ApplicationContextAware {
     private Map<String, AtomStrategy> strategies = new TreeMap<String, AtomStrategy>();
     private LinkedList<AtomStrategy> strategyDiscoverySequence = new LinkedList<AtomStrategy>();
 
-    @Autowired private AtomFactory atomFactory;
+    @Autowired
+    private AtomFactory atomFactory;
 
     /**
      * Caches strategy beans for further use

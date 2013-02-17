@@ -2,7 +2,6 @@ package infra.ca.strategy
 
 import infra.ca.Atom
 import infra.ca.AtomPush
-import infra.text.MarkdownService
 import infra.text.TextCleanService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -13,7 +12,8 @@ import org.springframework.stereotype.Component
  */
 @Component
 class HtmlStrategy extends AtomStrategy {
-    @Autowired private TextCleanService textCleanService
+    @Autowired
+    private TextCleanService textCleanService
 
     @Override
     boolean isContentSupported(AtomPush data) {

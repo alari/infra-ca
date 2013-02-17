@@ -24,7 +24,8 @@ import java.io.StringWriter;
  */
 @Service
 public class MarkdownService {
-    @Autowired TextCleanService textCleanService;
+    @Autowired
+    TextCleanService textCleanService;
 
     private ThreadLocal<PegDownProcessor> processorThreadLocal = new ThreadLocal<PegDownProcessor>();
     private ThreadLocal<Transformer> transformerThreadLocal = new ThreadLocal<Transformer>();

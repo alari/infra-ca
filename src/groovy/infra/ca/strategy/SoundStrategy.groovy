@@ -1,11 +1,11 @@
 package infra.ca.strategy
 
+import infra.ca.Atom
 import infra.ca.AtomPush
 import infra.file.storage.FileStorageService
 import infra.file.storage.FilesManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import infra.ca.Atom
 
 /**
  * @author alari

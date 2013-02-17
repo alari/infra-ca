@@ -1,5 +1,6 @@
 import infra.ca.AtomsManager
 import infra.ca.impl.AtomFactoryImpl
+import infra.ca.impl.AtomImageHolderFactoryImpl
 import infra.text.MarkdownService
 import infra.text.TextCleanService
 
@@ -54,6 +55,7 @@ Brief summary/description of the plugin.
         textCleanService(TextCleanService)
         atomsManager(AtomsManager)
         atomFactory(AtomFactoryImpl)
+        atomImageHolderFactory(AtomImageHolderFactoryImpl)
     }
 
     def doWithDynamicMethods = { ctx ->

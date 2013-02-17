@@ -28,7 +28,7 @@ class YouTubeStrategy extends AtomStrategy {
             atom.externalId = data.url.path.substring(1)
         } else if (data.url.host == "www.youtube.com" && data.url.path == "/watch") {
             // http://www.youtube.com/watch?v=zi3AqicZgEk&feature=g-logo&context=G2e33cabFOAAAAAAABAA
-            atom.externalId = URLEncodedUtils.parse(data.url.toURI(), "UTF-8").find {it.name == "v"}.value
+            atom.externalId = URLEncodedUtils.parse(data.url.toURI(), "UTF-8").find { it.name == "v" }.value
         }
 
         if (atom.externalId) {

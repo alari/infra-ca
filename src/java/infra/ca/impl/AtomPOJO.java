@@ -1,10 +1,7 @@
 package infra.ca.impl;
 
 import infra.ca.Atom;
-import infra.ca.AtomPush;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
