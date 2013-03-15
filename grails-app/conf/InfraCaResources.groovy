@@ -1,22 +1,22 @@
 modules = {
     'ca-ui' {
-        resource url: 'coffee/ca-ui.coffee'
+        resource url: 'coffee/ca-ui.coffee', plugin:'infra-ca'
         dependsOn "angular", "angular-ui", 'jquery-file-upload', 'mediaelementplayer', 'autoResize', 'ca-base'
     }
     'ca-CreativeAtom' {
-        resource url: 'coffee/ca-CreativeAtom.coffee'
+        resource url: 'coffee/ca-CreativeAtom.coffee', plugin:'infra-ca'
         dependsOn 'angular', 'ca-base'
     }
     'ca-CreativeChain' {
-        resource url: 'coffee/ca-CreativeChain.coffee'
+        resource url: 'coffee/ca-CreativeChain.coffee', plugin:'infra-ca'
         dependsOn 'angular', 'ca-base'
     }
     'ca-app' {
-        resource url:'coffee/ca-app.coffee'
+        resource url:'coffee/ca-app.coffee', plugin:'infra-ca'
         dependsOn 'ca-ui', 'ca-CreativeAtom', 'ca-CreativeChain', 'ca-base'
     }
     'ca-base' {
-        resource url: 'coffee/ca-base.coffee'
+        resource url: 'coffee/ca-base.coffee', plugin:'infra-ca'
         dependsOn 'angular'
     }
 
