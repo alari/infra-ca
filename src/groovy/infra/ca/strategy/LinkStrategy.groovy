@@ -91,8 +91,12 @@ class LinkStrategy extends AtomStrategy {
     }
 
     private boolean isImageSizeOk(final String absoluteUrl) {
-        URL url = new URL(absoluteUrl)
-        final BufferedImage bimg = ImageIO.read(url);
-        ((bimg.width >= 100 || bimg.height >= 100) && bimg.width >= 34 && bimg.height >= 34)
+        try {
+            URL url = new URL(absoluteUrl)
+            final BufferedImage bimg = ImageIO.read(url);
+            ((bimg.width >= 100 || bimg.height >= 100) && bimg.width >= 34 && bimg.height >= 34)
+        } catch (Exception e) {
+            return false
+        }
     }
 }
